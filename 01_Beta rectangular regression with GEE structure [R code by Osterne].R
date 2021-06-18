@@ -198,9 +198,9 @@ b = y - gamaa
 freq1 = unique(ind)
 freq2 = data.frame(table(ind))[,2] #quantas vezes cada individuo aparece
 freq3 = cumsum(freq2) #numero de vezes acumuladas
-freq4 = c(0,freq3) #adapataÁ„o para incluir o zero
+freq4 = c(0,freq3) #adapata√ß√£o para incluir o zero
 
-numInd = length(freq1) #completo È 31, pois È o numero do ultimo individuo
+numInd = length(freq1) #completo √© 31, pois √© o numero do ultimo individuo
 numTime = max(freq2) #numero maximo de vezes em que um individuo se repete
 
 B = list()
@@ -423,7 +423,7 @@ alpha.ep
 
 
 #=================================================================================================
-# Bootstrap n„o paramÈtrico
+# Bootstrap n√£o param√©trico
 #=================================================================================================
 data = read.csv(choose.files(), header=T, sep=";", dec=",")
 data = data.frame(cbind(data[5], log(data[2]), (log(data[2]))^2, data[3], data[4]))
@@ -495,7 +495,7 @@ alphaBoot
 
 
 #=================================================================================================
-# Bootstrap paramÈtrico
+# Bootstrap param√©trico
 #=================================================================================================
 data = read.csv(choose.files(), header=T, sep=";", dec=",")
 data = data.frame(cbind(data[5], log(data[2]), (log(data[2]))^2, data[3], data[4]))
@@ -526,7 +526,7 @@ fit = 1 - exp(-exp(eta.fit))  #cloglog
 
 dadosaux = data
 aux.con = c(rep("15%",34), rep("20%",74), rep("25%",73))
-with.fit = data.frame(cbind(tempo, concentraÁ„o, fit))
+with.fit = data.frame(cbind(tempo, concentra√ß√£o, fit))
 
 ggplot(dadosaux, aes(x = dadosaux[,2], y = dadosaux[,4], shape = factor(aux.con))) +
   geom_point() +
@@ -647,7 +647,7 @@ QIC
 
 
 #=================================================================================================
-# Diagnostics measures - ResÌduos, alavanca e dist‚ncia de Cook
+# Diagnostics measures - Res√≠duos, alavanca e dist√¢ncia de Cook
 #=================================================================================================
 dados = read.csv(choose.files(),header=T, sep=";", dec=",")
 attach(dados)
@@ -660,9 +660,9 @@ nome = paste("(", paciente, "," , tempo, ")")
 
 
 
-#ResÌduo ordin·rio:
+#Res√≠duo ordin√°rio:
 ro = chol(W)%*%(z-eta)
-plot(indice, ro, xlab="Õndice", ylab="ResÌduo",pch=16)
+plot(indice, ro, xlab="√çndice", ylab="Res√≠duo",pch=16)
 #identify(indice,ro, labels = nome, plot=TRUE,n = 1, cex=0.7)
 
 
@@ -670,20 +670,20 @@ plot(indice, ro, xlab="Õndice", ylab="ResÌduo",pch=16)
 #Matriz hat:
 problema = solve(t(X)%*%W%*%X)
 h = diag(chol(W)%*%X%*%problema%*%t(X)%*%chol(W))
-plot(indice, h, xlab="Õndice", ylab="ResÌduo",pch=16)
+plot(indice, h, xlab="√çndice", ylab="Res√≠duo",pch=16)
 
 
 
-#ResÌduo padronizado:
+#Res√≠duo padronizado:
 rp = ro/(sqrt(1-h))
-plot(indice,rp, xlab="Paciente", ylab="ResÌduo padronizado",pch=16)
+plot(indice,rp, xlab="Paciente", ylab="Res√≠duo padronizado",pch=16)
 #identify(indice,rp, labels = nome, plot=TRUE,n = 4, cex=0.7)
 
 
 
-#Dist‚ncia de Cook:
+#Dist√¢ncia de Cook:
 dc = (1/4)*rp^2*(h/(1-h))
-plot(indice,dc, xlab="Paciente", ylab="Dist‚ncia de Cook",pch=16)
+plot(indice,dc, xlab="Paciente", ylab="Dist√¢ncia de Cook",pch=16)
 #identify(indice, dc, labels = nome, plot=TRUE,n = 2, cex=0.7)
 
 
@@ -815,13 +815,13 @@ va_br_dep(N)
 
 
 
-#Construindo o envelope simulado com resÌduo padronizado
+#Construindo o envelope simulado com res√≠duo padronizado
 new.res.geral = list()
 res.ordenados = list()
 for (i in 1:25) {
   #Gerando novas amostras correlacionadas
   yij = va_br_dep(N)
-  #Calculando o resÌduo:
+  #Calculando o res√≠duo:
   new.res.geral = (yij - fit)/(sqrt(1-h))                 #padronizado
   #new.res.geral = (yij - fit)/sqrt(phi*mu*(1-mu)*(1-h))         #pearson
   res.ordenados[[i]] = sort(abs(new.res.geral))
@@ -829,7 +829,7 @@ for (i in 1:25) {
 
 erro = (yij - fit)/(sqrt(1-h))
 
-#EstatÌsticas de ordem
+#Estat√≠sticas de ordem
 valor = matrix(nrow = 25, ncol=N)
 for (k in 1:N) {
   for (j in 1:25) {
@@ -917,13 +917,13 @@ lines(linhas[,1],linhas[,4])
 
 #Extra
 ################################################################################
-#Construindo o envelope simulado com resÌduo de pearson padronizado
+#Construindo o envelope simulado com res√≠duo de pearson padronizado
 new.res.geral = list()
 res.ordenados = list()
 for (i in 1:25) {
   #Gerando novas amostras correlacionadas
   yij = va_br_dep(N)
-  #Calculando o resÌduo padronizado:
+  #Calculando o res√≠duo padronizado:
   new.res.geral[[i]] = (yij - fit)/sqrt(phi*mu*(1-mu)*(1-h))         #pearson
   #new.res.geral[[i]] = (yij - ajustado.vini)/(sqrt(1-h.geral))                 #padronizado
   res.ordenados[[i]] = sort(abs(new.res.geral[[i]]))
@@ -931,7 +931,7 @@ for (i in 1:25) {
 
 erro = (yij - fit)/sqrt(phi*mu*(1-mu)*(1-h))
 
-#EstatÌsticas de ordem
+#Estat√≠sticas de ordem
 valor = matrix(nrow = 25, ncol=N)
 for (k in 1:N) {
   for (j in 1:25) {
@@ -958,9 +958,9 @@ for(i in 1:N)   {Z[i]<-qnorm((i+N-1/8)/(2*N+1/2))}
 linhas = cbind(Z,min_med_max,sort(abs(erro)))
 faixa = range(linhas[,5],linhas[,2],linhas[,4])
 
-#Construindo o gr·fico
-plot(linhas[,1],linhas[,5],xlab="Valor esperado da estatÌstica de ordem meio-normal",
-     ylab="Valor absoluto ordenado do resÌduo padronizado", ylim=faixa, pch=16)
+#Construindo o gr√°fico
+plot(linhas[,1],linhas[,5],xlab="Valor esperado da estat√≠stica de ordem meio-normal",
+     ylab="Valor absoluto ordenado do res√≠duo padronizado", ylim=faixa, pch=16)
 par(new=TRUE)
 lines(linhas[,1],linhas[,2])
 lines(linhas[,1],linhas[,3],lty=2)
