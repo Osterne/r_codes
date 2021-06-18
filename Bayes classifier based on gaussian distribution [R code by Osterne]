@@ -1,6 +1,6 @@
 #=================================================================================================
 #Code: Bayes classifier based on gaussian distribution
-#Author: VinÌcius Osterne (vinicius@osterne -- www.osterne.com)
+#Author: Vin√≠cius Osterne (vinicius@osterne -- www.osterne.com)
 #=================================================================================================
 
 
@@ -288,7 +288,7 @@ for(obs in 1:length(test.data[,col.y])){
   aux.comp = names(aux.QL)[which.max(aux.QL)]
 
   #Comparing predicted class with true class
-  out1[obs] = names(aux.QL)[which.max(aux.QL)] #para a matriz de confus„o
+  out1[obs] = names(aux.QL)[which.max(aux.QL)] #para a matriz de confus√£o
   
 }
 
@@ -443,11 +443,11 @@ library(MASS) #necessary package
 X = scale(X, center = TRUE, scale = FALSE)
 data = data.frame(X, y)
 
-#Vetor de mÈdias para cada classe classe e geral
+#Vetor de m√©dias para cada classe classe e geral
 mu_k = data %>% group_by(y) %>% summarise_all(mean)
-mu_k = mu_k[,-1] #retirando a coluna referente ‡ classe
+mu_k = mu_k[,-1] #retirando a coluna referente √† classe
 mu = data %>% summarise_all(mean) %>% as_tibble()
-mu = mu[,-col.class] #retirando a coluna referente ‡ classe
+mu = mu[,-col.class] #retirando a coluna referente √† classe
 
 # Calculando as matrizes de covariancia de cada classe
 data.c1 = data %>% filter(y==1)
@@ -457,11 +457,11 @@ cov.c2 = cov(data.c2[,-22])
 data.c3 = data %>% filter(y==3)
 cov.c3 = cov(data.c3[,-22])
 
-# Matriz de dispers„o intraclasses (Sw)
+# Matriz de dispers√£o intraclasses (Sw)
 Sw = dim(data.c1)[1]*cov.c1 + dim(data.c2)[1]*cov.c2 + dim(data.c3)[1]*cov.c3 
 Sw = Sw + 0.001*diag(c(rep(1, dim(Sw)[1])))
 
-# Matriz de dispers„o interclasses
+# Matriz de dispers√£o interclasses
 Sb1 = as.matrix(mu_k[1,] - mu)
 Sb1 = t(Sb1) %*% Sb1
 Sb2 = as.matrix(mu_k[2,] - mu)
@@ -481,7 +481,7 @@ eigen.vector = Re(eigen(M)$vectors) #real part
 acum.variance = cumsum(eigen.value/sum(eigen.value))
 Q = eigen.vector[,c(1,2)]
 
-#TransformaÁ„o nos dados
+#Transforma√ß√£o nos dados
 lda.X = as.matrix(X)%*%Q
 lda.data = data.frame(lda.X, class = factor(y))
 head(lda.data)
